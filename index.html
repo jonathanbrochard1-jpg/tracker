@@ -73,13 +73,13 @@ textarea{width:100%;resize:vertical;min-height:50px}
 <nav class="nav" id="nav"></nav>
 <script>
 const $=id=>document.getElementById(id);
-const SK='ht-v5';
+const SK='ht-v6';
 const td=()=>new Date().toISOString().slice(0,10);
 const DAYS=['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
-const BRISTOL=[{v:1,l:'Billes',c:'#ef4444'},{v:2,l:'BosselÃ©',c:'#ef4444'},{v:3,l:'CraquelÃ©',c:'#f59e0b'},{v:4,l:'Lisse',c:'#22c55e'},{v:5,l:'Mou',c:'#22c55e'},{v:6,l:'PÃ¢teux',c:'#f59e0b'},{v:7,l:'Liquide',c:'#ef4444'}];
-const SOCIAL=[{v:0,l:'Seul',e:'ð«'},{v:1,l:'Bref',e:'ð'},{v:2,l:'ModÃ©rÃ©',e:'ð£ï¸'},{v:3,l:'Riche',e:'ð¤'}];
-const MCAT=['ProtÃ©ines','Glucides','LÃ©gumes','Fruits','Laitiers','Graisses','Sucre/UT'];
-const ME={'ProtÃ©ines':'ð¥©','Glucides':'ð','LÃ©gumes':'ð¥¦','Fruits':'ð','Laitiers':'ð§','Graisses':'ð¥','Sucre/UT':'ð¬'};
+const BRISTOL=[{v:1,l:'Billes',c:'#ef4444'},{v:2,l:'BosselÃÂ©',c:'#ef4444'},{v:3,l:'CraquelÃÂ©',c:'#f59e0b'},{v:4,l:'Lisse',c:'#22c55e'},{v:5,l:'Mou',c:'#22c55e'},{v:6,l:'PÃÂ¢teux',c:'#f59e0b'},{v:7,l:'Liquide',c:'#ef4444'}];
+const SOCIAL=[{v:0,l:'Seul',e:'Ã°ÂÂÂ«'},{v:1,l:'Bref',e:'Ã°ÂÂÂ'},{v:2,l:'ModÃÂ©rÃÂ©',e:'Ã°ÂÂÂ£Ã¯Â¸Â'},{v:3,l:'Riche',e:'Ã°ÂÂ¤Â'}];
+const MCAT=['ProtÃÂ©ines','Glucides','LÃÂ©gumes','Fruits','Laitiers','Graisses','Sucre/UT'];
+const ME={'ProtÃÂ©ines':'Ã°ÂÂ¥Â©','Glucides':'Ã°ÂÂÂ','LÃÂ©gumes':'Ã°ÂÂ¥Â¦','Fruits':'Ã°ÂÂÂ','Laitiers':'Ã°ÂÂ§Â','Graisses':'Ã°ÂÂ¥Â','Sucre/UT':'Ã°ÂÂÂ¬'};
 
 let state={entries:{},sel:td(),tab:'log'};
 try{const s=localStorage.getItem(SK);if(s)state.entries=JSON.parse(s)}catch(e){}
@@ -87,7 +87,7 @@ try{const s=localStorage.getItem(SK);if(s)state.entries=JSON.parse(s)}catch(e){}
 function save(){try{localStorage.setItem(SK,JSON.stringify(state.entries))}catch(e){}}
 function E(){return state.entries[state.sel]||dflt()}
 function S(u){state.entries[state.sel]={...E(),...u,date:state.sel};save();render()}
-function dflt(){return{date:td(),mood_am:0,mood_pm:0,energy_am:0,energy_pm:0,stress:0,hydration:0,medikinet:[false,false,false],med_doses:[10,10,10],med_times:['','',''],med_study:[0,0,0],creon:[0,0,0],coffees:[],stools:[],social:null,screen_before_bed:0,nap:false,nap_duration:0,morning_light:false,last_meal_time:'',meals:[{label:'Petit-dÃ©j',time:'',desc:'',cats:[]},{label:'DÃ©jeuner',time:'',desc:'',cats:[]},{label:'DÃ®ner',time:'',desc:'',cats:[]}],urinations:[],notes:''}}
+function dflt(){return{date:td(),mood_am:0,mood_pm:0,energy_am:0,energy_pm:0,stress:0,hydration:0,medikinet:[false,false,false],med_doses:[10,10,10],med_times:['','',''],med_study:[0,0,0],creon:[0,0,0],coffees:[],stools:[],social:null,screen_before_bed:0,nap:false,nap_duration:0,morning_light:false,last_meal_time:'',meals:[{label:'Petit-dÃÂ©j',time:'',desc:'',cats:[]},{label:'DÃÂ©jeuner',time:'',desc:'',cats:[]},{label:'DÃÂ®ner',time:'',desc:'',cats:[]}],urinations:[],notes:''}}
 
 function scaleColor(v,max){const p=v/max;return p<=.3?'var(--red)':p<=.6?'var(--amber)':'var(--green)'}
 function now(){const d=new Date();return d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0')}
@@ -98,7 +98,7 @@ function scaleHTML(id,label,emoji,val,max=10){
     const on=i<val;const c=val>0?scaleColor(val,max):'var(--card2)';
     h+=`<button class="scale-bar" style="background:${on?c:'var(--card2)'};opacity:${on?(.4+(i/max)*.6):1}" onclick="S({${id}:${i+1===val?0:i+1}})">&nbsp;</button>`;
   }
-  h+=`</div><span class="scale-val">${val||'â'}/${max}</span></div>`;
+  h+=`</div><span class="scale-val">${val||'Ã¢ÂÂ'}/${max}</span></div>`;
   return h;
 }
 
@@ -121,23 +121,23 @@ function renderLog(){
 
   return `
   <button id="uri-timer-btn" style="width:100%;padding:16px;border-radius:14px;border:none;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;margin-bottom:10px;transition:all .2s;background:${window._uriStart?'var(--red)':'var(--accent)'};color:#fff" onclick="toggleUriTimer()">
-    ${window._uriStart?'â± ArrÃªter â <span id=\"uri-timer-display\">0s</span>':'ð½ Uriner'}
+    ${window._uriStart?'Ã¢ÂÂ± ArrÃÂªter Ã¢ÂÂ <span id=\"uri-timer-display\">0s</span>':'Ã°ÂÂÂ½ Uriner'}
   </button>
 
   <div class="card">
-    <div style="font-size:11px;font-weight:600;color:var(--dim);margin-bottom:8px">âï¸ Matin</div>
-    ${scaleHTML('mood_am','Humeur','ð',e.mood_am)}
-    ${scaleHTML('energy_am','Ãnergie','â¡',e.energy_am)}
+    <div style="font-size:11px;font-weight:600;color:var(--dim);margin-bottom:8px">Ã¢ÂÂÃ¯Â¸Â Matin</div>
+    ${scaleHTML('mood_am','Humeur','Ã°ÂÂÂ',e.mood_am)}
+    ${scaleHTML('energy_am','ÃÂnergie','Ã¢ÂÂ¡',e.energy_am)}
     <div style="height:1px;background:var(--border);margin:10px 0"></div>
-    <div style="font-size:11px;font-weight:600;color:var(--dim);margin-bottom:8px">ð Soir</div>
-    ${scaleHTML('mood_pm','Humeur','ð',e.mood_pm)}
-    ${scaleHTML('energy_pm','Ãnergie','â¡',e.energy_pm)}
+    <div style="font-size:11px;font-weight:600;color:var(--dim);margin-bottom:8px">Ã°ÂÂÂ Soir</div>
+    ${scaleHTML('mood_pm','Humeur','Ã°ÂÂÂ',e.mood_pm)}
+    ${scaleHTML('energy_pm','ÃÂnergie','Ã¢ÂÂ¡',e.energy_pm)}
   </div>
 
   <div class="card">
-    ${scaleHTML('stress','Stress cognitif','ð§ ',e.stress,5)}
+    ${scaleHTML('stress','Stress cognitif','Ã°ÂÂ§Â ',e.stress,5)}
     <div class="row">
-      <span class="label">ð§ Eau (L)</span>
+      <span class="label">Ã°ÂÂÂ§ Eau (L)</span>
       <div class="flex" style="gap:3px">
         ${[0.5,1,1.5,2,2.5,3].map(n=>`<button class="mg-btn ${e.hydration===n?'on':''}" style="min-width:32px;height:28px;font-size:11px" onclick="S({hydration:${e.hydration===n?0:n}})">${n}</button>`).join('')}
       </div>
@@ -145,7 +145,7 @@ function renderLog(){
   </div>
 
   <div class="card">
-    <div class="card-title">ð Medikinet</div>
+    <div class="card-title">Ã°ÂÂÂ Medikinet</div>
     <div class="flex gap" style="justify-content:center">
       ${[0,1,2].map(i=>{
         const on=(e.medikinet||[])[i];
@@ -154,30 +154,30 @@ function renderLog(){
         const study=(e.med_study||[0,0,0])[i];
         return `<div style="text-align:center;flex:1;background:var(--card2);border-radius:10px;padding:8px 4px;border:1px solid ${on?'var(--green)':'var(--border)'}">
           <div style="font-size:10px;font-weight:500;color:${on?'var(--green)':'var(--dim)'}; margin-bottom:5px">Dose ${i+1}</div>
-          <button style="width:38px;height:38px;border-radius:19px;border:none;font-size:17px;cursor:pointer;background:${on?'var(--green)':'var(--card)'};color:${on?'#fff':'var(--dim)'}" onclick="toggleMed(${i})">${on?'â':'â'}</button>
+          <button style="width:38px;height:38px;border-radius:19px;border:none;font-size:17px;cursor:pointer;background:${on?'var(--green)':'var(--card)'};color:${on?'#fff':'var(--dim)'}" onclick="toggleMed(${i})">${on?'Ã¢ÂÂ':'Ã¢ÂÂ'}</button>
           <div class="flex gap" style="justify-content:center;margin-top:5px">
             ${[5,10,15].map(d=>`<button class="mg-btn ${dose===d?'on':''}" onclick="setMedDose(${i},${d})">${d}</button>`).join('')}
           </div>
           ${on?`<input type="time" value="${time||''}" style="width:75px;padding:2px 4px;font-size:10px;margin-top:4px;text-align:center" onchange="setMedTime(${i},this.value)">
-          <div style="font-size:9px;color:var(--dim);margin-top:3px">ð Ãtude</div>
+          <div style="font-size:9px;color:var(--dim);margin-top:3px">Ã°ÂÂÂ ÃÂtude</div>
           <div class="flex" style="justify-content:center;gap:1px;margin-top:2px">
             ${[1,2,3,4,5].map(v=>`<button style="width:20px;height:20px;border-radius:10px;border:none;font-size:9px;cursor:pointer;background:${study===v?'var(--accent)':'var(--card)'};color:${study===v?'#fff':'var(--dim)'}" onclick="setMedStudy(${i},${study===v?0:v})">${v}</button>`).join('')}
           </div>`:`<div style="font-size:9px;color:var(--dim);margin-top:4px">non pris</div>`}
         </div>`;
       }).join('')}
     </div>
-    <div style="text-align:center;font-size:10px;color:var(--dim);margin-top:6px">${mc}/3 Â· ${totalMg}mg</div>
+    <div style="text-align:center;font-size:10px;color:var(--dim);margin-top:6px">${mc}/3 ÃÂ· ${totalMg}mg</div>
   </div>
 
   <div class="card">
-    <div class="card-title">ð CrÃ©on (enzymes)</div>
+    <div class="card-title">Ã°ÂÂÂ CrÃÂ©on (enzymes)</div>
     <div class="flex gap">
-      ${['Petit-dÃ©j','DÃ©jeuner','DÃ®ner'].map((l,i)=>{
+      ${['Petit-dÃÂ©j','DÃÂ©jeuner','DÃÂ®ner'].map((l,i)=>{
         const n=(e.creon||[0,0,0])[i]||0;
         return`<div style="flex:1;text-align:center;background:var(--card2);border-radius:10px;padding:8px 4px;border:1px solid ${n>0?'var(--green)':'var(--border)'}">
           <div style="font-size:11px;font-weight:500;color:${n>0?'var(--green)':'var(--dim)'}; margin-bottom:6px">${l}</div>
           <div class="flex center" style="justify-content:center;gap:6px">
-            <button class="pomo-btn" style="width:26px;height:26px;font-size:14px" onclick="adjCreon(${i},-1)">â</button>
+            <button class="pomo-btn" style="width:26px;height:26px;font-size:14px" onclick="adjCreon(${i},-1)">Ã¢ÂÂ</button>
             <span style="font-size:16px;font-weight:700;min-width:18px">${n}</span>
             <button class="pomo-btn" style="width:26px;height:26px;font-size:14px" onclick="adjCreon(${i},1)">+</button>
           </div>
@@ -188,20 +188,20 @@ function renderLog(){
 
   <div class="card">
     <div class="flex between center" style="margin-bottom:8px">
-      <div class="card-title" style="margin:0">â CafÃ©ine</div>
-      <span style="font-size:10px;color:var(--dim)">${(e.coffees||[]).length}Ã</span>
+      <div class="card-title" style="margin:0">Ã¢ÂÂ CafÃÂ©ine</div>
+      <span style="font-size:10px;color:var(--dim)">${(e.coffees||[]).length}ÃÂ</span>
     </div>
-    <button style="width:100%;padding:12px;border-radius:12px;border:none;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;margin-bottom:8px;background:var(--amber);color:#fff" onclick="addCoffee()">â CafÃ© maintenant</button>
+    <button style="width:100%;padding:12px;border-radius:12px;border:none;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;margin-bottom:8px;background:var(--amber);color:#fff" onclick="addCoffee()">Ã¢ÂÂ CafÃÂ© maintenant</button>
     ${(e.coffees||[]).map((c,i)=>`<div class="uri-row">
       <span style="color:var(--dim);min-width:18px">#${i+1}</span>
-      <span style="font-size:12px">â</span>
-      <input type="time" value="${c.time||''}" style="width:80px;padding:3px 5px;font-size:11px" onchange="updCoffee(${i},this.value)">
-      <button class="del-btn" onclick="delCoffee(${i})">Ã</button>
+      <span style="font-size:12px">Ã¢ÂÂ</span>
+      <input type="time" value="${c.time||''}" style="width:80px;padding:3px 5px;font-size:11px" oninput="updCoffee(${i},this.value)" onchange="updCoffee(${i},this.value)">
+      <button class="del-btn" onclick="delCoffee(${i})">ÃÂ</button>
     </div>`).join('')}
   </div>
 
   <div class="card">
-    <div class="card-title">ð¤ Interaction sociale</div>
+    <div class="card-title">Ã°ÂÂ¤Â Interaction sociale</div>
     <div class="flex gap">
       ${SOCIAL.map(s=>`<button class="social-btn ${e.social===s.v?'on':''}" onclick="S({social:${e.social===s.v?'null':s.v}})">
         <div style="font-size:18px">${s.e}</div>
@@ -212,11 +212,11 @@ function renderLog(){
 
   <div class="card">
     <div class="flex between center" style="margin-bottom:8px">
-      <div class="card-title" style="margin:0">ð© Transit</div>
-      <span style="font-size:10px;color:var(--dim)">${(e.stools||[]).length}Ã</span>
+      <div class="card-title" style="margin:0">Ã°ÂÂÂ© Transit</div>
+      <span style="font-size:10px;color:var(--dim)">${(e.stools||[]).length}ÃÂ</span>
     </div>
     <div style="background:var(--card2);border-radius:10px;padding:10px;margin-bottom:8px;border:1px dashed var(--border)">
-      <div style="font-size:10px;color:var(--dim);margin-bottom:6px">Nouvelle entrÃ©e</div>
+      <div style="font-size:10px;color:var(--dim);margin-bottom:6px">Nouvelle entrÃÂ©e</div>
       <div style="font-size:10px;color:var(--dim);margin-bottom:4px">Bristol</div>
       <div class="flex" style="gap:3px;margin-bottom:8px">
         ${BRISTOL.map(b=>`<button class="bristol-btn ${window._newBristol===b.v?'on':''}" style="${window._newBristol===b.v?'background:'+b.c+';color:#fff;border-color:'+b.c:''}" onclick="window._newBristol=${window._newBristol===b.v?0:b.v};render()">
@@ -232,39 +232,39 @@ function renderLog(){
           {v:'moutarde',l:'Moutarde',c:'#a08020',t:'#fff'},
           {v:'brun_clair',l:'Brun clair',c:'#8B6914',t:'#fff'},
           {v:'brun',l:'Brun',c:'#5C4033',t:'#fff'},
-          {v:'brun_fonce',l:'Brun foncÃ©',c:'#3B2412',t:'#fff'},
+          {v:'brun_fonce',l:'Brun foncÃÂ©',c:'#3B2412',t:'#fff'},
         ].map(s=>`<button style="flex:1;padding:6px 2px;border-radius:8px;cursor:pointer;font-family:inherit;text-align:center;border:${window._newStoolColor===s.v?'2px solid var(--accent)':'1px solid var(--border)'};background:${s.c};color:${s.t};font-size:7px;font-weight:600" onclick="window._newStoolColor='${window._newStoolColor===s.v?'':s.v}';render()">${s.l}</button>`).join('')}
       </div>
-      ${window._newStoolColor==='jaune_clair'?'<div style="text-align:center;font-size:10px;color:var(--amber);margin-bottom:6px">â ï¸ StÃ©atorrhÃ©e â vÃ©rifier dose CrÃ©on</div>':''}
-      <button style="width:100%;padding:10px;border-radius:10px;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;background:${window._newBristol?'var(--green)':'var(--card)'};color:${window._newBristol?'#fff':'var(--dim)'}" onclick="addStool()" ${window._newBristol?'':'disabled'}>â Enregistrer</button>
+      ${window._newStoolColor==='jaune_clair'?'<div style="text-align:center;font-size:10px;color:var(--amber);margin-bottom:6px">Ã¢ÂÂ Ã¯Â¸Â StÃÂ©atorrhÃÂ©e Ã¢ÂÂ vÃÂ©rifier dose CrÃÂ©on</div>':''}
+      <button style="width:100%;padding:10px;border-radius:10px;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;background:${window._newBristol?'var(--green)':'var(--card)'};color:${window._newBristol?'#fff':'var(--dim)'}" onclick="addStool()" ${window._newBristol?'':'disabled'}>Ã¢ÂÂ Enregistrer</button>
     </div>
     ${(e.stools||[]).map((st,i)=>`<div class="uri-row">
       <span style="color:var(--dim);min-width:18px">#${i+1}</span>
-      <input type="time" value="${st.time||''}" style="width:80px;padding:3px 5px;font-size:11px" onchange="updStool(${i},'time',this.value)">
+      <input type="time" value="${st.time||''}" style="width:80px;padding:3px 5px;font-size:11px" oninput="updStool(${i},'time',this.value)" onchange="updStool(${i},'time',this.value)">
       <span style="font-size:11px;font-weight:700">B${st.bristol||'?'}</span>
       ${st.color?`<span style="display:inline-block;width:14px;height:14px;border-radius:7px;background:${{jaune_clair:'#f0d060',jaune:'#c8a830',moutarde:'#a08020',brun_clair:'#8B6914',brun:'#5C4033',brun_fonce:'#3B2412'}[st.color]||'var(--dim)'}"></span>`:''}
       <span style="font-size:9px;color:var(--dim)">${(st.color||'').replace('_',' ')}</span>
-      <button class="del-btn" onclick="delStool(${i})">Ã</button>
+      <button class="del-btn" onclick="delStool(${i})">ÃÂ</button>
     </div>`).join('')}
   </div>
 
   <div class="card">
-    <div class="card-title">ð´ Sommeil & rÃ©cup</div>
-    <div class="row"><span class="label">ð½ Dernier repas</span><input type="time" value="${e.last_meal_time||''}" onchange="S({last_meal_time:this.value})"></div>
-    <div class="row"><span class="label">ð± Ãcran</span><input type="number" value="${e.screen_before_bed||''}" placeholder="min" onchange="S({screen_before_bed:+this.value||0})"><span style="font-size:10px;color:var(--dim)">min avant lit</span></div>
-    <div class="row"><span class="label">ð´ Sieste</span>
+    <div class="card-title">Ã°ÂÂÂ´ Sommeil & rÃÂ©cup</div>
+    <div class="row"><span class="label">Ã°ÂÂÂ½ Dernier repas</span><input type="time" value="${e.last_meal_time||''}" onchange="S({last_meal_time:this.value})"></div>
+    <div class="row"><span class="label">Ã°ÂÂÂ± ÃÂcran</span><input type="number" value="${e.screen_before_bed||''}" placeholder="min" onchange="S({screen_before_bed:+this.value||0})"><span style="font-size:10px;color:var(--dim)">min avant lit</span></div>
+    <div class="row"><span class="label">Ã°ÂÂÂ´ Sieste</span>
       <button class="mg-btn ${e.nap?'on':''}" onclick="S({nap:!E().nap})">${e.nap?'Oui':'Non'}</button>
       ${e.nap?`<input type="number" value="${e.nap_duration||''}" placeholder="min" style="width:50px" onchange="S({nap_duration:+this.value||0})"><span style="font-size:10px;color:var(--dim)">min</span>`:''}
     </div>
-    <div class="row"><span class="label">âï¸ LumiÃ¨re AM</span>
+    <div class="row"><span class="label">Ã¢ÂÂÃ¯Â¸Â LumiÃÂ¨re AM</span>
       <button class="mg-btn ${e.morning_light?'on':''}" onclick="S({morning_light:!E().morning_light})">${e.morning_light?'Oui':'Non'}</button>
     </div>
   </div>
 
   <div class="card">
     <div class="flex between center" style="margin-bottom:8px">
-      <div class="card-title" style="margin:0">ð½ Mictions</div>
-      <span style="font-size:10px;color:var(--dim)">${(e.urinations||[]).length}Ã Â· ${(e.urinations||[]).reduce((s,u)=>s+(u.sec||0),0)}s</span>
+      <div class="card-title" style="margin:0">Ã°ÂÂÂ½ Mictions</div>
+      <span style="font-size:10px;color:var(--dim)">${(e.urinations||[]).length}ÃÂ ÃÂ· ${(e.urinations||[]).reduce((s,u)=>s+(u.sec||0),0)}s</span>
     </div>
     ${(e.urinations||[]).map((u,i)=>`<div class="uri-row">
       <span style="color:var(--dim);min-width:18px">#${i+1}</span>
@@ -272,19 +272,19 @@ function renderLog(){
       <input type="number" value="${u.sec||''}" placeholder="sec" style="width:42px;padding:3px 5px;font-size:11px" onchange="updUri(${i},'sec',+this.value||0)">
       <span style="font-size:9px;color:var(--dim)">s</span>
       <select style="padding:3px;font-size:10px" onchange="updUri(${i},'color',this.value)">
-        <option value="" ${!u.color?'selected':''}>â</option>
+        <option value="" ${!u.color?'selected':''}>Ã¢ÂÂ</option>
         <option value="clair" ${u.color==='clair'?'selected':''}>clair</option>
         <option value="jaune" ${u.color==='jaune'?'selected':''}>jaune</option>
-        <option value="foncÃ©" ${u.color==='foncÃ©'?'selected':''}>foncÃ©</option>
+        <option value="foncÃÂ©" ${u.color==='foncÃÂ©'?'selected':''}>foncÃÂ©</option>
       </select>
-      <button class="del-btn" onclick="delUri(${i})">Ã</button>
+      <button class="del-btn" onclick="delUri(${i})">ÃÂ</button>
     </div>`).join('')}
     <button class="btn-ghost" onclick="addUri()">+ Ajouter manuellement</button>
   </div>
 
   <div class="card">
-    <div class="card-title">ð Notes</div>
-    <textarea placeholder="Examen, toux, journÃ©e chargÃ©e..." onchange="S({notes:this.value})">${e.notes||''}</textarea>
+    <div class="card-title">Ã°ÂÂÂ Notes</div>
+    <textarea placeholder="Examen, toux, journÃÂ©e chargÃÂ©e..." onchange="S({notes:this.value})">${e.notes||''}</textarea>
   </div>`;
 }
 
@@ -296,12 +296,12 @@ function renderMeals(){
       <span style="font-weight:600;font-size:13px">${m.label}</span>
       <div class="flex center" style="gap:5px">
         <input type="time" value="${m.time||''}" style="width:85px;padding:3px 6px;font-size:11px" onchange="updMeal(${i},'time',this.value)">
-        ${i>=3?`<button class="del-btn" onclick="delMeal(${i})">Ã</button>`:''}
+        ${i>=3?`<button class="del-btn" onclick="delMeal(${i})">ÃÂ</button>`:''}
       </div>
     </div>
     <div class="flex center" style="gap:5px;margin-bottom:6px">
-      <input type="text" id="meal-desc-${i}" value="${m.desc||''}" placeholder="Description ou ð¤ dicte..." style="flex:1;font-size:12px" onchange="updMeal(${i},'desc',this.value)">
-      <button class="mic-btn" id="mic-${i}" onclick="toggleVoice(${i})">ð¤</button>
+      <input type="text" id="meal-desc-${i}" value="${m.desc||''}" placeholder="Description ou Ã°ÂÂÂ¤ dicte..." style="flex:1;font-size:12px" onchange="updMeal(${i},'desc',this.value)">
+      <button class="mic-btn" id="mic-${i}" onclick="toggleVoice(${i})">Ã°ÂÂÂ¤</button>
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:3px">
       ${MCAT.map(c=>`<button class="cat-pill ${(m.cats||[]).includes(c)?'on':''}" onclick="toggleCat(${i},'${c}')">${ME[c]||''} ${c}</button>`).join('')}
@@ -309,18 +309,18 @@ function renderMeals(){
   </div>`).join('')}
   <button class="btn-ghost" onclick="addMeal()">+ Collation</button>
   <div class="card" style="margin-top:10px">
-    <div class="card-title">ð RÃ©sumÃ©</div>
+    <div class="card-title">Ã°ÂÂÂ RÃÂ©sumÃÂ©</div>
     <div style="display:flex;flex-wrap:wrap;gap:4px">
       ${MCAT.map(c=>{const n=(e.meals||[]).filter(m=>(m.cats||[]).includes(c)).length;if(!n)return'';
-        return`<span class="pill on" style="background:${c==='Sucre/UT'?'rgba(239,68,68,.2)':'rgba(99,102,241,.2)'};color:${c==='Sucre/UT'?'var(--red)':'var(--accent)'}; border:none">${ME[c]} Ã${n}</span>`}).join('')}
+        return`<span class="pill on" style="background:${c==='Sucre/UT'?'rgba(239,68,68,.2)':'rgba(99,102,241,.2)'};color:${c==='Sucre/UT'?'var(--red)':'var(--accent)'}; border:none">${ME[c]} ÃÂ${n}</span>`}).join('')}
     </div>
   </div>`;
 }
 
 function renderHistory(){
   const sorted=Object.keys(state.entries).sort().reverse();
-  if(!sorted.length)return'<div style="text-align:center;padding:40px;color:var(--dim)">Aucune entrÃ©e</div>';
-  let h = `<button style="width:100%;padding:12px;border-radius:12px;border:none;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;margin-bottom:12px;background:var(--teal);color:#fff" onclick="exportCSV()">ð Exporter CSV</button>`;
+  if(!sorted.length)return'<div style="text-align:center;padding:40px;color:var(--dim)">Aucune entrÃÂ©e</div>';
+  let h = `<button style="width:100%;padding:12px;border-radius:12px;border:none;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;margin-bottom:12px;background:var(--teal);color:#fff" onclick="exportCSV()">Ã°ÂÂÂ Exporter CSV</button>`;
   h += sorted.slice(0,30).map(d=>{
     const x=state.entries[d],dd=new Date(d+'T12:00:00');
     const md=(x.medikinet||[]).filter(Boolean).length;
@@ -329,23 +329,23 @@ function renderHistory(){
         <span style="font-weight:600;font-size:13px">${DAYS[dd.getDay()]} ${dd.getDate()}/${(dd.getMonth()+1).toString().padStart(2,'0')}
           ${d===td()?'<span style="font-size:9px;color:var(--accent);margin-left:4px">auj.</span>':''}</span>
         <div style="display:flex;gap:5px;font-size:10px;color:var(--dim)">
-          ${x.mood_am?`ð${x.mood_am}/${x.mood_pm||'â'}`:''}
-          ${x.energy_am?` â¡${x.energy_am}/${x.energy_pm||'â'}`:''}
-          ${md?` ð${md}`:''}
-          ${x.hydration?` ð§${x.hydration}L`:''}
+          ${x.mood_am?`Ã°ÂÂÂ${x.mood_am}/${x.mood_pm||'Ã¢ÂÂ'}`:''}
+          ${x.energy_am?` Ã¢ÂÂ¡${x.energy_am}/${x.energy_pm||'Ã¢ÂÂ'}`:''}
+          ${md?` Ã°ÂÂÂ${md}`:''}
+          ${x.hydration?` Ã°ÂÂÂ§${x.hydration}L`:''}
         </div>
       </div>
       <div style="font-size:10px;color:var(--dim)">
         ${(x.meals||[]).filter(m=>m.desc).length>0?(x.meals||[]).filter(m=>m.desc).length+' repas':''}
-        ${(x.stools||[]).length?' Â· ð©'+(x.stools||[]).length+'Ã':''}
-        ${(x.coffees||[]).length?' Â· â'+(x.coffees||[]).length+'Ã':''}
-        ${(x.urinations||[]).length?' Â· ð½'+(x.urinations||[]).length+'Ã':''}
-        ${x.social!==null&&x.social!==undefined?' Â· '+SOCIAL[x.social]?.e:''}
-        ${x.notes?' Â· "'+x.notes.slice(0,25)+(x.notes.length>25?'â¦':'')+'"':''}
+        ${(x.stools||[]).length?' ÃÂ· Ã°ÂÂÂ©'+(x.stools||[]).length+'ÃÂ':''}
+        ${(x.coffees||[]).length?' ÃÂ· Ã¢ÂÂ'+(x.coffees||[]).length+'ÃÂ':''}
+        ${(x.urinations||[]).length?' ÃÂ· Ã°ÂÂÂ½'+(x.urinations||[]).length+'ÃÂ':''}
+        ${x.social!==null&&x.social!==undefined?' ÃÂ· '+SOCIAL[x.social]?.e:''}
+        ${x.notes?' ÃÂ· "'+x.notes.slice(0,25)+(x.notes.length>25?'Ã¢ÂÂ¦':'')+'"':''}
       </div>
     </div>`;
   }).join('');
-  h+=`<div style="text-align:center;margin-top:14px"><button style="font-size:11px;color:var(--red);background:none;border:none;cursor:pointer" onclick="if(confirm('Supprimer toutes les donnÃ©es ?')){state.entries={};save();render()}">RÃ©initialiser</button></div>`;
+  h+=`<div style="text-align:center;margin-top:14px"><button style="font-size:11px;color:var(--red);background:none;border:none;cursor:pointer" onclick="if(confirm('Supprimer toutes les donnÃÂ©es ?')){state.entries={};save();render()}">RÃÂ©initialiser</button></div>`;
   return h;
 }
 
@@ -354,19 +354,19 @@ function render(){
   const dO=new Date(state.sel+'T12:00:00');
   const wk=Array.from({length:7},(_,i)=>{const d=new Date(dO);d.setDate(dO.getDate()-dO.getDay()+i);return d.toISOString().slice(0,10)});
 
-  let h=`<h1>Tracker</h1><div class="sub">${Object.keys(state.entries).length} jours enregistrÃ©s</div>
+  let h=`<h1>Tracker</h1><div class="sub">${Object.keys(state.entries).length} jours enregistrÃÂ©s</div>
   <div class="week-bar" style="margin-top:10px">
-    <button class="week-nav" onclick="shiftWeek(-7)">â¹</button>
+    <button class="week-nav" onclick="shiftWeek(-7)">Ã¢ÂÂ¹</button>
     ${wk.map(d=>{const dd=new Date(d+'T12:00:00');return`<button class="week-day ${d===state.sel?'sel':''} ${d===td()?'today':''}" onclick="state.sel='${d}';render()">
       <div style="font-size:9px;opacity:.6">${DAYS[dd.getDay()]}</div>
       <div style="font-size:13px;font-weight:600">${dd.getDate()}</div>
       ${state.entries[d]?'<div style="width:4px;height:4px;border-radius:2px;background:'+(d===state.sel?'#fff':'var(--accent)')+';margin:2px auto 0"></div>':''}
     </button>`}).join('')}
-    <button class="week-nav" onclick="shiftWeek(7)">âº</button>
+    <button class="week-nav" onclick="shiftWeek(7)">Ã¢ÂÂº</button>
   </div>`;
 
   if(state.tab!=='history'){
-    h+=`<div class="flex between" style="font-size:10px;color:var(--dim);margin-bottom:3px"><span>ComplÃ©tion</span><span>${c}%</span></div>
+    h+=`<div class="flex between" style="font-size:10px;color:var(--dim);margin-bottom:3px"><span>ComplÃÂ©tion</span><span>${c}%</span></div>
     <div class="completion"><div class="completion-fill" style="width:${c}%"></div></div>`;
   }
 
@@ -375,7 +375,7 @@ function render(){
   else h+=renderHistory();
 
   $('app').innerHTML=h;
-  $('nav').innerHTML=['log:ð:Journal','meals:ð½:Repas','history:ð:Historique'].map(x=>{
+  $('nav').innerHTML=['log:Ã°ÂÂÂ:Journal','meals:Ã°ÂÂÂ½:Repas','history:Ã°ÂÂÂ:Historique'].map(x=>{
     const[k,icon,l]=x.split(':');
     return`<button class="nav-btn ${state.tab===k?'active':''}" onclick="state.tab='${k}';render()"><span class="nav-icon">${icon}</span>${l}</button>`;
   }).join('');
@@ -441,7 +441,7 @@ window._uriStart=null;
 window._uriInterval=null;
 function toggleUriTimer(){
   if(window._uriStart){
-    // Stop timer â save entry
+    // Stop timer Ã¢ÂÂ save entry
     const elapsed=Math.round((Date.now()-window._uriStart)/1000);
     const startTime=new Date(window._uriStart);
     const timeStr=startTime.getHours().toString().padStart(2,'0')+':'+startTime.getMinutes().toString().padStart(2,'0');
@@ -502,7 +502,7 @@ render();
 // Service Worker for true offline support
 if('serviceWorker' in navigator){
   const swCode = `
-    const CACHE='ht-cache-v2';
+    const CACHE='ht-cache-v3';
     self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(['/tracker.html'])).then(()=>self.skipWaiting()))});
     self.addEventListener('activate',e=>{e.waitUntil(self.clients.claim())});
     self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).then(res=>{const c=res.clone();caches.open(CACHE).then(cache=>cache.put(e.request,c));return res}).catch(()=>caches.match('/tracker.html'))))});
